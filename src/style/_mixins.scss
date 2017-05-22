@@ -1,0 +1,32 @@
+@mixin blockStyle{
+  border: 5px solid darken($gray, 3%);
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 15px;
+  margin-bottom: 5px;
+}
+@mixin btnStyle{
+  border-radius: 3px;
+  border-style: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+@mixin textPadding{
+  padding: 15px;
+}
+
+@keyframes blink {
+  0%{
+    background-color: $green;
+  }
+  50%{
+    background-color: $green;
+  }
+  100%{
+    background-color: $gray;
+  }
+}

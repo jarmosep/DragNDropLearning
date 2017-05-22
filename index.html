@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta charset="UTF-8">
+  <title>E-learning demo</title>
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link href='./node_modules/dragular/dist/dragular.css' rel='stylesheet' type='text/css'/>
+  <link rel="stylesheet" href="./build/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="./node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="./node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="./node_modules/dragular/dist/dragular.min.js"></script>
+  <script src="./build/code.js"></script>
+</head>
+<body ng-app="e-learning">
+  <div class="main_container" id="main_container" ng-controller="learningCtrl">
+    <div class="header">
+      <b>What is Net Working Capital (NWC)?</b>
+      <h2>Core components of Net Working Capital</h2>
+    </div>
+    <div class="welcome" ng-hide="continue">
+      <p>Companies gather funds from equity and debt markets to finance capital tied to their operations in form of cash and liquid assets, fixed assets and net working capital - if net working capital increases typically the company needs to borrow more money.</p>
+      <i class="continue ion-ios-arrow-forward" ng-click="continueToQuiz()"></i>
+      <div class="sources_and_uses">
+        <div class="sources">
+          <h3>Sources</h3>
+          <div><p>Equity <br> - from owners <br> -from net profit</p></div>
+          <i class="ion-android-add-circle"></i>
+          <div><p>Debt <br> - from debt investors and financial institutions</p></div>
+        </div>
+        <div class="arrow">
+          <div>
+            <i class="ion-arrow-right-a"></i>
+          </div>
+        </div>
+        <div class="uses">
+          <h3>Uses</h3>
+          <div><p>Cash and liquid assets</p></div>
+          <i class="ion-android-add-circle"></i>
+          <div><p>Fixed assets</p></div>
+          <i class="ion-android-add-circle"></i>
+          <div><p>Net Working Capital</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="intro" ng-hide="!continue">
+      <p class="description">The main components of NWC are described on the chart below. Drag components of NWC from below the graph to corresponding descriptions.</p>
+      <p class="networking_block">Networking capital</p>
+      <p class="mission">You will also be given statements concerning all components and your task is to choose whether the statement is true or false.</p>
+    </div>
+    <div class="question_blocks container" ng-hide="!continue">
+      <div class="question" ng-repeat="question in questions track by $index">
+        <div class="dragged">
+          {{ dragged.content }}
+        </div>
+        <div class="description">
+          <p ng-bind-html="question.connectBlockText | breakLines"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="answer_blocks container" ng-hide="!continue">
+      <div ng-repeat="block in draggables" class="answer_block">
+        <p>{{ block.content }}</p>
+      </div>
+      <p class="quiz_over" ng-show="quizOver">You got {{ totalPoints }} points out of 16.</p>
+    </div>
+
+    <div class="modal" ng-show="showTrueFalse">
+      <div class="question_and_answer">
+        <p class="tf_question">{{ trueFalses[index].questionText }}</p>
+        <p class="tf_answer" ng-show="showAnswer"><strong>{{yourAnswer}} </strong>{{ trueFalses[index].questionAnswerCorrect }}</p>
+      </div>
+      <div class="controllers" >
+        <p class="next" ng-show="showAnswer" ng-click="nextQuestion()">Next</p>
+        <p class="true" ng-show="!showAnswer" ng-click="checkAnswer(true, trueFalses[index].value)">True</p>
+        <p class="false" ng-show="!showAnswer" ng-click="checkAnswer(false, trueFalses[index].value)">False</p>
+      </div>
+    </div>
+    <div class="overlay" ng-show="showTrueFalse"></div>
+  </div>
+</body>
+</html>

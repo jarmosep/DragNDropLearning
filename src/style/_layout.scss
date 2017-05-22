@@ -1,0 +1,146 @@
+h1{
+  font-size:24px;
+  text-align: center;
+}
+h3{
+  margin-top:15px;
+}
+.main_container, .landing{
+  @include outer-container;
+  margin-top:15px;
+  padding: 25px;
+  background-color: white;
+  .header{
+    @include span-columns(12);
+    padding-top:20px;
+  }
+  .welcome{
+    min-height: 500px;
+    .continue{
+      margin-top:15px;
+      display: block;
+      text-align: center;
+      cursor: pointer;
+      font-size:32px;
+      width:50px;
+      height: 50px;
+      line-height: 50px;
+      color: white;
+      border-radius: 100%;
+      background-color: $green;
+    }
+    .sources_and_uses{
+      @include span-columns(6);
+      float:right;
+      text-align: center;
+      i{
+        display: block;
+        color: $red;
+        font-size: 40px;
+        margin-top:5px;
+      }
+      .sources{
+        @include span-columns(5);
+        div{
+          @include textPadding;
+          background-color: $green;
+          color: white;
+        }
+      }
+      .arrow{
+        @include span-columns(1);
+        div{
+          position: relative;
+          text-align: center;
+          min-height: 280px;
+          i{
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            margin-top: -9px;
+          }
+        }
+      }
+      .uses{
+        @include span-columns(5);
+        div{
+          @include textPadding;
+          background-color: $blue;
+          color: white;
+          &:last-of-type{
+            background-color: $orange;
+          }
+        }
+      }
+    }
+  }
+  .intro{
+    @include span-columns(12);
+    margin-top:15px;
+    margin-bottom: 15px;
+    .description{
+      @include span-columns(4.5);
+    }
+    .networking_block{
+      @include span-columns(3);
+      @include textPadding;
+      @include btnStyle;
+      background-color: $black;
+
+    }
+    .mission{
+      @include span-columns(4.5);
+    }
+  }
+  .question_blocks{
+    @include span-columns(12);
+    .question{
+      @include span-columns(3);
+      background-color: white;
+      @include media(max-width $mobile){
+        @include span-columns(12);
+      }
+      .description{
+        @include blockStyle;
+        font-size: 14px;
+        padding-top: 10px;
+        min-height: 320px;
+      }
+      .dragged{
+        background-color: $green;
+        min-height: 58px;
+        border: 5px solid darken($green, 7%);
+        border-radius: 3px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        p{
+          @include textPadding;
+          @include btnStyle;
+          background-color: darken($green, 7%);
+        }
+      }
+    }
+  }
+  .answer_blocks{
+    @include span-columns(12);
+    background-color: white;
+    .answer_block{
+      display: inline-block;
+      padding:15px;
+      &:first-of-type{
+        padding-left: 0;
+      }
+      p{
+        @include textPadding;
+        @include btnStyle;
+        background-color: $green;
+      }
+    }
+    .quiz_over{
+      text-align: center;
+      font-size: 24px;
+      padding-bottom: 15px;
+    }
+  }
+}

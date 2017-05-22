@@ -1,0 +1,62 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+  left: 0;
+  right: 0;
+	transition: opacity 200ms ease;
+  z-index: 999;
+  background: rgba(0,0,0,0.4);
+  opacity: 1;
+  &.ng-show,&.ng-hide {
+    opacity: 0;
+  }
+}
+
+.modal {
+	padding: 15px;
+	opacity: 1;
+	width: 500px;
+  background: #fff;
+	box-shadow: 0 0 50px rgba(0,0,0,0.5);
+	position: fixed;
+  top: 30%;
+  transform: translateY(0px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1000;
+  transition: top 300ms ease;
+  .question_and_answer{
+    min-height:240px;
+    .tf_question{
+      font-weight: bold;
+			padding-bottom: 5px;
+			border-bottom: 1px solid darken($gray,15%);
+    }
+    .tf_answer{
+      padding-top: 5px;
+    }
+  }
+  .controllers{
+    @include span-columns(12);
+    .true{
+      @include span-columns(6);
+      @include textPadding;
+      @include btnStyle;
+      background-color: $green;
+    }
+    .false{
+      @include span-columns(6);
+      @include textPadding;
+      @include btnStyle;
+      background-color: $red;
+    }
+    .next{
+      @include span-columns(12);
+      @include textPadding;
+      @include btnStyle;
+      background-color: $green;
+    }
+  }
+}
