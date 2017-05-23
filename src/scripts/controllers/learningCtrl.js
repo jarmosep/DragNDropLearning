@@ -4,9 +4,6 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
   $scope.continueToQuiz = function(){
     $scope.continue = true;
   }
-  $scope.goToMenu = function(){
-    $scope.continue = false;
-  }
   $scope.totalPoints = 0;
   $scope.allDragged = 0;
   $scope.showTrueFalse = false;

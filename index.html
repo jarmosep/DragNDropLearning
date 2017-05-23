@@ -68,7 +68,7 @@
 
       </div>
       <p class="quiz_over" ng-show="quizOver">You got {{ totalPoints }} points out of 16.</p>
-      <i class="continue ion-ios-arrow-forward" ng-show="quizOver" ng-click="goToMenu()"></i>
+      <i class="continue ion-ios-arrow-forward" ng-show="quizOver" ng-click="window.location.reload();"></i>
     </div>
 
     <div class="modal" ng-show="showTrueFalse">
@@ -82,7 +82,7 @@
       </div>
       <div class="answer">
         <p ng-show="showAnswer"><strong>{{yourAnswer}} </strong>{{ trueFalses[index].questionAnswerCorrect }}</p>
-        <i class="ion-ios-arrow-forward" ng-show="showAnswer" ng-click="nextQuestion()"></i>
+        <i class="ion-ios-arrow-forward" ng-show="showAnswer" onClick="nextQuestion()"></i>
       </div>
     </div>
     <div class="overlay" ng-show="showTrueFalse"></div>

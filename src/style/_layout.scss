@@ -218,6 +218,7 @@ span{
       @include span-columns(10);
       padding-top:45px;
       text-align: left;
+      font-size: 24px;
     }
     .continue{
       @include span-columns(2);
@@ -238,11 +239,6 @@ span{
         border-bottom-right-radius: 10px;
         background-color: $green;
       }
-    }
-    .quiz_over{
-      text-align: center;
-      font-size: 24px;
-      padding-bottom: 15px;
     }
   }
 }
