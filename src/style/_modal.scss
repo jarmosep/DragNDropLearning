@@ -14,10 +14,9 @@
 }
 
 .modal {
-	padding: 15px;
 	opacity: 1;
-	width: 500px;
-  background: #fff;
+	width: 540px;
+  background: $dark-gray;
 	box-shadow: 0 0 50px rgba(0,0,0,0.5);
 	position: fixed;
   top: 30%;
@@ -27,36 +26,63 @@
   margin: 0 auto;
   z-index: 1000;
   transition: top 300ms ease;
+	border: 7px solid $gray;
+	border-top-left-radius: 15px;
+	border-bottom-right-radius: 15px;
   .question_and_answer{
-    min-height:240px;
+		@include clearfix;
+		position: relative;
+		height: 155px;
     .tf_question{
-      font-weight: bold;
-			padding-bottom: 5px;
-			border-bottom: 1px solid darken($gray,15%);
+			color: white;
+			padding: 15px;
     }
-    .tf_answer{
-      padding-top: 5px;
-    }
+		.controllers{
+			@include span-columns(12, block-collapse);
+			position: absolute;
+			bottom: 0;
+			padding:15px;
+			.true, .false{
+				@include span-columns(4, block-collapse);
+				@include textPadding;
+				@include btnStyle;
+				border-radius: 0;
+				padding: 5px;
+				color: black;
+				background-color: white;
+			}
+			.or{
+				@include span-columns(4, block-collapse);
+				padding: 5px;
+				color: white;
+				text-align: center;
+			}
+			.next{
+				@include span-columns(12);
+				@include textPadding;
+				padding: 10px;
+				@include btnStyle;
+				background-color: $green;
+			}
+		}
   }
-  .controllers{
-    @include span-columns(12);
-    .true{
-      @include span-columns(6);
-      @include textPadding;
-      @include btnStyle;
-      background-color: $green;
-    }
-    .false{
-      @include span-columns(6);
-      @include textPadding;
-      @include btnStyle;
-      background-color: $red;
-    }
-    .next{
-      @include span-columns(12);
-      @include textPadding;
-      @include btnStyle;
-      background-color: $green;
-    }
-  }
+	.answer{
+		padding: 15px;
+		border-bottom-right-radius: 8px;
+		background-color: $red-ish;
+		height: 220px;
+		color: white;
+		border-top: 7px solid $gray;
+		position: relative;
+		p{
+			color: white;
+		}
+		i{
+			@include clickNext;
+			position: absolute;
+			bottom: 15px;
+			right: 15px;
+		}
+	}
+
 }

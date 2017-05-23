@@ -51,8 +51,10 @@
     </div>
     <div class="question_blocks container" ng-hide="!continue">
       <div class="question" ng-repeat="question in questions track by $index">
-        <div class="dragged">
-          {{ dragged.content }}
+        <div class="dragged_container">
+          <div class="dragged">
+
+          </div>
         </div>
         <div class="description">
           <p ng-bind-html="question.connectBlockText | breakLines"></p>
@@ -63,19 +65,24 @@
     <div class="answer_blocks container" ng-hide="!continue">
       <div ng-repeat="block in draggables" class="answer_block">
         <p>{{ block.content }}</p>
+
       </div>
       <p class="quiz_over" ng-show="quizOver">You got {{ totalPoints }} points out of 16.</p>
+      <i class="continue ion-ios-arrow-forward" ng-show="quizOver" ng-click="goToMenu()"></i>
     </div>
 
     <div class="modal" ng-show="showTrueFalse">
       <div class="question_and_answer">
         <p class="tf_question">{{ trueFalses[index].questionText }}</p>
-        <p class="tf_answer" ng-show="showAnswer"><strong>{{yourAnswer}} </strong>{{ trueFalses[index].questionAnswerCorrect }}</p>
+        <div class="controllers" >
+          <p class="true" ng-show="!showAnswer" ng-click="checkAnswer(true, trueFalses[index].value)">TRUE</p>
+          <p class="or" ng-show="!showAnswer">OR</p>
+          <p class="false" ng-show="!showAnswer" ng-click="checkAnswer(false, trueFalses[index].value)">FALSE</p>
+        </div>
       </div>
-      <div class="controllers" >
-        <p class="next" ng-show="showAnswer" ng-click="nextQuestion()">Next</p>
-        <p class="true" ng-show="!showAnswer" ng-click="checkAnswer(true, trueFalses[index].value)">True</p>
-        <p class="false" ng-show="!showAnswer" ng-click="checkAnswer(false, trueFalses[index].value)">False</p>
+      <div class="answer">
+        <p ng-show="showAnswer"><strong>{{yourAnswer}} </strong>{{ trueFalses[index].questionAnswerCorrect }}</p>
+        <i class="ion-ios-arrow-forward" ng-show="showAnswer" ng-click="nextQuestion()"></i>
       </div>
     </div>
     <div class="overlay" ng-show="showTrueFalse"></div>

@@ -4,7 +4,9 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
   $scope.continueToQuiz = function(){
     $scope.continue = true;
   }
-
+  $scope.goToMenu = function(){
+    $scope.continue = false;
+  }
   $scope.totalPoints = 0;
   $scope.allDragged = 0;
   $scope.showTrueFalse = false;
@@ -12,7 +14,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
     { content: 'Accounts receivable' },
     { content: 'Inventory' },
     { content: 'Accounts payable' },
-    { content: 'Advances received (and progress payments)' }
+    { content: 'Advances received' }
   ];
   $scope.dragzone = [];
   $scope.questions = [
@@ -39,7 +41,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
     },
     {
       connectBlockAnswer: 'Inventory',
-      connectBlockText: 'Refers to the quantity of goods and materials company has in stock. Inventory usually consists of four main elements:\n• Raw Materials \n • and Components \n • Work-In-Process (WIP) \n • Finished Goods \n • Spare Parts and Consumables \n Inventories tend to increase when business grows but the turnover of inventories (Net sales divided by inventories or Cost Of Goods Sold divided by inventories) should not be negatively affected.',
+      connectBlockText: 'Refers to the quantity of goods and materials company has in stock. Inventory usually consists of four main elements: <span>\n• Raw Materials \n • and Components \n • Work-In-Process (WIP) \n • Finished Goods \n • Spare Parts and Consumables </span> \n Inventories tend to increase when business grows but the turnover of inventories (Net sales divided by inventories or Cost Of Goods Sold divided by inventories) should not be negatively affected.',
       trueFalseSection: [
         {
           questionText: 'A key reason for a company to keep inventories is to secure availability when own production or customers have a need. ',
@@ -80,7 +82,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
       ]
     },
     {
-      connectBlockAnswer: 'Advances received (and progress payments)',
+      connectBlockAnswer: 'Advances received',
       connectBlockText: 'Represents the money we have received in advance from our customer in exchange for the products and services we have committed to deliver. They are funds we have received but not yet earned.',
       trueFalseSection: [
         {

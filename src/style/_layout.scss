@@ -2,8 +2,17 @@ h1{
   font-size:24px;
   text-align: center;
 }
+h2{
+  color: $green;
+}
 h3{
   margin-top:15px;
+}
+p,b{
+  color: $black;
+}
+span{
+  color:#E15415;
 }
 .main_container, .landing{
   @include outer-container;
@@ -17,17 +26,8 @@ h3{
   .welcome{
     min-height: 500px;
     .continue{
+      @include clickNext;
       margin-top:15px;
-      display: block;
-      text-align: center;
-      cursor: pointer;
-      font-size:32px;
-      width:50px;
-      height: 50px;
-      line-height: 50px;
-      color: white;
-      border-radius: 100%;
-      background-color: $green;
     }
     .sources_and_uses{
       @include span-columns(6);
@@ -44,7 +44,9 @@ h3{
         div{
           @include textPadding;
           background-color: $green;
-          color: white;
+          p{
+            color: white;
+          }
         }
       }
       .arrow{
@@ -71,6 +73,9 @@ h3{
           &:last-of-type{
             background-color: $orange;
           }
+          p{
+            color: white;
+          }
         }
       }
     }
@@ -79,6 +84,7 @@ h3{
     @include span-columns(12);
     margin-top:15px;
     margin-bottom: 15px;
+    height:82px;
     .description{
       @include span-columns(4.5);
     }
@@ -87,7 +93,37 @@ h3{
       @include textPadding;
       @include btnStyle;
       background-color: $black;
-
+      position: relative;
+      &:before{
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 10px;
+        background: $black;
+        height: 20px;
+        right: 0;
+        margin: auto;
+        @include media(max-width $mobile){
+          display:none;
+        }
+      }
+      &:after{
+        content: '';
+        height: 10px;
+        width: 807px;
+        position: absolute;
+        display: block;
+        background: $black;
+        bottom: -30px;
+        left: -40vw;
+        right: -40vw;
+        margin: auto;
+        @include media(max-width $mobile){
+          display:none;
+        }
+      }
     }
     .mission{
       @include span-columns(4.5);
@@ -98,26 +134,79 @@ h3{
     .question{
       @include span-columns(3);
       background-color: white;
+      position: relative;
+      &:before{
+        content: '';
+        width: 10px;
+        height: 20px;
+        display: block;
+        position: absolute;
+        top: -19px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: $black;
+        @include media(max-width $mobile){
+          display:none;
+        }
+      }
+      &:nth-child(1){
+        .dragged_container{
+          .dragged{
+            p{  @include placedItemWithPlusIcon;  }
+          }
+        }
+      }
+      &:nth-child(2){
+        .dragged_container{
+          .dragged{
+            p{  @include placedItemWithPlusIcon; text-align: center;}
+          }
+        }
+      }
+      &:nth-child(3){
+        .dragged_container{
+          .dragged{ p{ @include placedItemWithMinusIcon; }
+          }
+        }
+      }
+      &:nth-child(4){
+        .dragged_container{
+          .dragged{
+            p{  @include placedItemWithMinusIcon; }
+          }
+        }
+      }
       @include media(max-width $mobile){
         @include span-columns(12);
       }
       .description{
         @include blockStyle;
+        border-bottom-right-radius: 15px;
         font-size: 14px;
         padding-top: 10px;
         min-height: 320px;
+        @include media(max-width $mobile){
+          min-height: 120px;
+        }
       }
-      .dragged{
-        background-color: $green;
-        min-height: 58px;
-        border: 5px solid darken($green, 7%);
-        border-radius: 3px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        p{
-          @include textPadding;
-          @include btnStyle;
-          background-color: darken($green, 7%);
+      .dragged_container{
+        background-color: darken($green, 7%);
+        min-height: 54px;
+        padding:7px;
+        .dragged{
+          background-color: $green;
+          border-top-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          min-height: 40px;
+          p{
+            @include textPadding;
+            padding:11px;
+            @include btnStyle;
+            text-align: right;
+            background-color: darken($green, 7%);
+            border-radius:0;
+          }
         }
       }
     }
@@ -125,6 +214,16 @@ h3{
   .answer_blocks{
     @include span-columns(12);
     background-color: white;
+    .quiz_over{
+      @include span-columns(10);
+      padding-top:45px;
+      text-align: left;
+    }
+    .continue{
+      @include span-columns(2);
+      @include clickNext;
+      float: right;
+    }
     .answer_block{
       display: inline-block;
       padding:15px;
@@ -134,6 +233,9 @@ h3{
       p{
         @include textPadding;
         @include btnStyle;
+        border-radius:0;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
         background-color: $green;
       }
     }

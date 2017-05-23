@@ -8,6 +8,14 @@ app.filter("breakLines", function($filter) {
 });
 
 app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", function($scope, $timeout, dragularService){
+  // Continue to quiz from the 'landingpage'
+  $scope.continue = false;
+  $scope.continueToQuiz = function(){
+    $scope.continue = true;
+  }
+  $scope.goToMenu = function(){
+    $scope.continue = false;
+  }
   $scope.totalPoints = 0;
   $scope.allDragged = 0;
   $scope.showTrueFalse = false;
@@ -15,7 +23,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
     { content: 'Accounts receivable' },
     { content: 'Inventory' },
     { content: 'Accounts payable' },
-    { content: 'Advances received (and progress payments)' }
+    { content: 'Advances received' }
   ];
   $scope.dragzone = [];
   $scope.questions = [
@@ -42,7 +50,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
     },
     {
       connectBlockAnswer: 'Inventory',
-      connectBlockText: 'Refers to the quantity of goods and materials company has in stock. Inventory usually consists of four main elements:\n• Raw Materials \n • and Components \n • Work-In-Process (WIP) \n • Finished Goods \n • Spare Parts and Consumables \n Inventories tend to increase when business grows but the turnover of inventories (Net sales divided by inventories or Cost Of Goods Sold divided by inventories) should not be negatively affected.',
+      connectBlockText: 'Refers to the quantity of goods and materials company has in stock. Inventory usually consists of four main elements: <span>\n• Raw Materials \n • and Components \n • Work-In-Process (WIP) \n • Finished Goods \n • Spare Parts and Consumables </span> \n Inventories tend to increase when business grows but the turnover of inventories (Net sales divided by inventories or Cost Of Goods Sold divided by inventories) should not be negatively affected.',
       trueFalseSection: [
         {
           questionText: 'A key reason for a company to keep inventories is to secure availability when own production or customers have a need. ',
@@ -83,7 +91,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
       ]
     },
     {
-      connectBlockAnswer: 'Advances received (and progress payments)',
+      connectBlockAnswer: 'Advances received',
       connectBlockText: 'Represents the money we have received in advance from our customer in exchange for the products and services we have committed to deliver. They are funds we have received but not yet earned.',
       trueFalseSection: [
         {
@@ -108,7 +116,8 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
   $timeout(function(){
     var maincontainer = document.getElementById('main_container');
     var dropzones = document.querySelectorAll('.dragged');
-    var draggables = maincontainer.children[4];
+    var draggables = maincontainer.children[4]; // this is the '.answer_blocks' div.
+    // Making namespaces to corresponding dragging spots. There could be more sophisticated ways to create this.
     dragularService([dropzones[0],draggables.children[0]], {
       nameSpace: 'receivable',
       scope: $scope,
@@ -130,7 +139,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
       revertOnSpill: true
     });
   }, 0);
-
+  // Firing a barrage of questions upon successful drop
   $scope.$on('dragulardrop', shootQuestion('drop'));
 
   var questionsLength;
@@ -140,11 +149,11 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
      for(var i=0; i<$scope.questions.length; i++) {
        var dropped = arguments[2].innerText.replace(/\s+/g, '').toLowerCase();
        var answer = $scope.questions[i].connectBlockAnswer.replace(/\s+/g, '').toLowerCase();
-       if (dropped == answer){
-         $scope.trueFalses = $scope.questions[i].trueFalseSection;
+       if (dropped == answer){ // Checking if the dropped innerText value is the same as in the object
+         $scope.trueFalses = $scope.questions[i].trueFalseSection; // If successful, we'll put true-false-questions from that object to an array.
          questionsLength = $scope.questions[i].trueFalseSection.length;
          $timeout(function () {
-           $scope.showTrueFalse = true;
+           $scope.showTrueFalse = true; // we'll show the modal, where true-false-questions are asked.
            $scope.index = 0;
            $scope.totalPoints += 1;
            $scope.allDragged += 1;
@@ -154,6 +163,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
      }
    };
   }
+  // Scoring system for the true-false-section.
  $scope.checkAnswer = function(value, questions){
     if(value == questions){
       $scope.totalPoints += 1;
@@ -163,19 +173,17 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
     }
     $scope.showAnswer = true;
   };
+
  $scope.nextQuestion = function(){
     $scope.index += 1;
     $scope.showAnswer = false;
-    if($scope.index >= questionsLength){
-      $scope.showTrueFalse = false;
-      if($scope.allDragged == 4){
+    if($scope.index >= questionsLength){ // when the array is finished (index exceeds the array length value)...
+      $scope.showTrueFalse = false; //...we'll hide the modal.
+      if($scope.allDragged == 4){ // when all elements are dragged, quiz is over and final scores are shown.
         $scope.quizOver = true;
       }
     }
   };
-  $scope.continue = false;
-  $scope.continueToQuiz = function(){
-    $scope.continue = true;
-  }
+
 
 }]);
