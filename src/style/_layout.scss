@@ -14,7 +14,7 @@ p,b{
 span{
   color:#E15415;
 }
-.main_container, .landing{
+.main_container{
   @include outer-container;
   margin-top:15px;
   padding: 25px;

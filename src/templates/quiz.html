@@ -1,0 +1,40 @@
+<div class="intro">
+  <p class="description">The main components of NWC are described on the chart below. Drag components of NWC from below the graph to corresponding descriptions.</p>
+  <p class="networking_block">Networking capital</p>
+  <p class="mission">You will also be given statements concerning all components and your task is to choose whether the statement is true or false.</p>
+</div>
+<div class="question_blocks container">
+  <div class="question" ng-repeat="question in questions track by $index">
+    <div class="dragged_container">
+      <div class="dragged">
+      </div>
+    </div>
+    <div class="description">
+      <p ng-bind-html="question.connectBlockText | breakLines"></p>
+    </div>
+  </div>
+</div>
+<div class="answer_blocks container">
+  <div ng-repeat="block in draggables" class="answer_block">
+    <p>{{ block.content }}</p>
+
+  </div>
+  <p class="quiz_over" ng-show="quizOver">You got {{ totalPoints }} points out of 16.</p>
+  <i class="continue ion-ios-arrow-forward" ng-show="quizOver" ui-sref="landing"></i>
+</div>
+
+<div class="modal" ng-show="showTrueFalse">
+  <div class="question_and_answer">
+    <p class="tf_question">{{ trueFalses[index].questionText }}</p>
+    <div class="controllers" >
+      <p class="true" ng-show="!showAnswer" ng-click="checkAnswer(true, trueFalses[index].value)">TRUE</p>
+      <p class="or" ng-show="!showAnswer">OR</p>
+      <p class="false" ng-show="!showAnswer" ng-click="checkAnswer(false, trueFalses[index].value)">FALSE</p>
+    </div>
+  </div>
+  <div class="answer">
+    <p ng-show="showAnswer"><strong>{{yourAnswer}} </strong>{{ trueFalses[index].questionAnswerCorrect }}</p>
+    <i class="ion-ios-arrow-forward" ng-show="showAnswer" ng-click="nextQuestion()"></i>
+  </div>
+</div>
+<div class="overlay" ng-show="showTrueFalse"></div>

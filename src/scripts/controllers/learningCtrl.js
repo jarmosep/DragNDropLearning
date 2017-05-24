@@ -1,9 +1,5 @@
-app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", function($scope, $timeout, dragularService){
-  // Continue to quiz from the 'landingpage'
-  $scope.continue = false;
-  $scope.continueToQuiz = function(){
-    $scope.continue = true;
-  }
+app.controller("LearningCtrl", ["$scope", "$timeout", "$state", "dragularService", function($scope, $timeout, $state, dragularService){
+
   $scope.totalPoints = 0;
   $scope.allDragged = 0;
   $scope.showTrueFalse = false;
@@ -104,7 +100,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
   $timeout(function(){
     var maincontainer = document.getElementById('main_container');
     var dropzones = document.querySelectorAll('.dragged');
-    var draggables = maincontainer.children[4]; // this is the '.answer_blocks' div.
+    var draggables = maincontainer.children[2]; // this is the '.answer_blocks' div.
     // Making namespaces to corresponding dragging spots. There could be more sophisticated ways to create this.
     dragularService([dropzones[0],draggables.children[0]], {
       nameSpace: 'receivable',

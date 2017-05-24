@@ -1,4 +1,4 @@
-var app = angular.module('e-learning', ['ngAnimate', 'ngSanitize','dragularModule']);
+var app = angular.module('e-learning', ['ui.router', 'ngSanitize', 'ngAnimate', 'dragularModule']);
 
 app.filter("breakLines", function($filter) {
  return function(data) {
@@ -7,12 +7,30 @@ app.filter("breakLines", function($filter) {
  };
 });
 
-app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", function($scope, $timeout, dragularService){
-  // Continue to quiz from the 'landingpage'
-  $scope.continue = false;
-  $scope.continueToQuiz = function(){
-    $scope.continue = true;
-  }
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+    $stateProvider // stateProvider changes UI view upon an action
+        .state('landing', {
+            url: '/',
+            templateUrl: 'src/templates/landing.html',
+            controller: 'LandingCtrl'
+
+        })
+        .state('quiz', {
+            url: '/quiz',
+            templateUrl: 'src/templates/quiz.html',
+            controller: 'LearningCtrl'
+        });
+
+        $urlRouterProvider.otherwise('/');
+
+}]);
+
+app.controller("LandingCtrl", ["$scope", "$timeout", "$state", function($scope, $timeout, $state){
+  $state.go('landing');
+}]);
+
+app.controller("LearningCtrl", ["$scope", "$timeout", "$state", "dragularService", function($scope, $timeout, $state, dragularService){
+
   $scope.totalPoints = 0;
   $scope.allDragged = 0;
   $scope.showTrueFalse = false;
@@ -113,7 +131,7 @@ app.controller("learningCtrl", ["$scope", "$timeout", "dragularService", functio
   $timeout(function(){
     var maincontainer = document.getElementById('main_container');
     var dropzones = document.querySelectorAll('.dragged');
-    var draggables = maincontainer.children[4]; // this is the '.answer_blocks' div.
+    var draggables = maincontainer.children[2]; // this is the '.answer_blocks' div.
     // Making namespaces to corresponding dragging spots. There could be more sophisticated ways to create this.
     dragularService([dropzones[0],draggables.children[0]], {
       nameSpace: 'receivable',

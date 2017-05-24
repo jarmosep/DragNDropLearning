@@ -1,4 +1,4 @@
-var app = angular.module('e-learning', ['ngAnimate', 'ngSanitize','dragularModule']);
+var app = angular.module('e-learning', ['ui.router', 'ngSanitize', 'ngAnimate', 'dragularModule']);
 
 app.filter("breakLines", function($filter) {
  return function(data) {
